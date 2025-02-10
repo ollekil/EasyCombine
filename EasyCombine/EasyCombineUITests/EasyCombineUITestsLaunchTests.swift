@@ -2,7 +2,7 @@
 //  EasyCombineUITestsLaunchTests.swift
 //  EasyCombineUITests
 //
-//  Created by 배정길 on 2/9/25.
+//  Created by hb9879055 on 2/10/25.
 //
 
 import XCTest
@@ -17,7 +17,6 @@ final class EasyCombineUITestsLaunchTests: XCTestCase {
         continueAfterFailure = false
     }
 
-    @MainActor
     func testLaunch() throws {
         let app = XCUIApplication()
         app.launch()
