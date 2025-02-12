@@ -7,13 +7,16 @@ EasyCombine
 │
 │-- Domain                  # 비즈니스 로직 (순수한 비즈니스 계층, UI/외부 의존 없음)
 │   │-- Entities                        # 도메인 엔티티 정의    
+        ├── Character.swift  ← 캐릭터 데이터 모델 (Entity)
 │   │   │-- User.swift                              # 사용자 모델
 │   │   │-- Quiz.swift                              # 퀴즈 모델
 │   │-- UserCases                       # 유스케이스 - 도메인 로직 처리
+        ├── SelectCharacterUseCase.swift  ← 캐릭터 선택 비즈니스 로직
 │       │-- FetchQuizUseCase.swift                  # 퀴즈 데이터를 가져오는 유스케이스
 │
 │-- Data                   # 외부 데이터 관리 (API, DB, 로컬 저장소 등)
 │   │-- Repositories                    # 데이터 저장소 인터페이스 및 구현
+        ├── CharacterSelectionRepository.swift  ← 캐릭터 저장소 (UserDefaults 사용)
 │   │   │-- QuizeRepository.swift                   # 퀴즈 관련 데이터 관리
 │   │   │-- UserRepository.swift                    # 사용자 관련 데이터 관리
 │   │-- Network                         # 네트워크 관련 계층
@@ -26,7 +29,7 @@ EasyCombine
 │   │-- Screens                         # 화면별 ViewController 와 ViewModel
 │   │   │-- Main                                    # 메인 화면
 │   │   │   │-- MainViewController.swift                    # 메인 화면 뷰 컨트롤러
-│   │   │   │-- MainViewModel.swift                         # 메인 화면 상태 관리
+│   │   │   │-- MainViewModel.swift                         # UI 상태 관리 및 UseCase 연결
 │   │   │-- Maze                                    # 미로 화면
 │   │   │   │-- MazeViewController.swift                    # 미로 화면 뷰 컨트롤러
 │   │   │   │-- MazeViewModel.swift                         # 미로 화면 상태 관리

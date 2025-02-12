@@ -39,6 +39,9 @@
 		6038F9C92D59E663002C0EC4 /* Publisher+Extenstions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6038F9C82D59E663002C0EC4 /* Publisher+Extenstions.swift */; };
 		6038F9CB2D59E66D002C0EC4 /* Subscriber+Helpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6038F9CA2D59E66D002C0EC4 /* Subscriber+Helpers.swift */; };
 		C03DD6002D5A85C10041DA1A /* FetchUsersUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = C03DD5FF2D5A85C00041DA1A /* FetchUsersUseCase.swift */; };
+		C04B025D2D5D4D4100CA353A /* CharacterSelectionRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = C04B025C2D5D4D4100CA353A /* CharacterSelectionRepository.swift */; };
+		C04B025F2D5D4D5400CA353A /* SelectCharacterUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = C04B025E2D5D4D5400CA353A /* SelectCharacterUseCase.swift */; };
+		C04B02612D5D50CE00CA353A /* Character.swift in Sources */ = {isa = PBXBuildFile; fileRef = C04B02602D5D50CE00CA353A /* Character.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -95,6 +98,9 @@
 		6038F9C82D59E663002C0EC4 /* Publisher+Extenstions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Publisher+Extenstions.swift"; sourceTree = "<group>"; };
 		6038F9CA2D59E66D002C0EC4 /* Subscriber+Helpers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Subscriber+Helpers.swift"; sourceTree = "<group>"; };
 		C03DD5FF2D5A85C00041DA1A /* FetchUsersUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FetchUsersUseCase.swift; sourceTree = "<group>"; };
+		C04B025C2D5D4D4100CA353A /* CharacterSelectionRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CharacterSelectionRepository.swift; sourceTree = "<group>"; };
+		C04B025E2D5D4D5400CA353A /* SelectCharacterUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectCharacterUseCase.swift; sourceTree = "<group>"; };
+		C04B02602D5D50CE00CA353A /* Character.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Character.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -228,6 +234,7 @@
 			children = (
 				6038F9952D59D9CF002C0EC4 /* User.swift */,
 				6038F9972D59DA3F002C0EC4 /* Quiz.swift */,
+				C04B02602D5D50CE00CA353A /* Character.swift */,
 			);
 			path = Entities;
 			sourceTree = "<group>";
@@ -237,6 +244,7 @@
 			children = (
 				6038F9992D59DA50002C0EC4 /* FetchQuizUseCase.swift */,
 				C03DD5FF2D5A85C00041DA1A /* FetchUsersUseCase.swift */,
+				C04B025E2D5D4D5400CA353A /* SelectCharacterUseCase.swift */,
 			);
 			path = UserCases;
 			sourceTree = "<group>";
@@ -246,6 +254,7 @@
 			children = (
 				6038F99E2D59DF2A002C0EC4 /* QuizeRepository.swift */,
 				6038F9A02D59DF49002C0EC4 /* UserRepository.swift */,
+				C04B025C2D5D4D4100CA353A /* CharacterSelectionRepository.swift */,
 			);
 			path = Repositories;
 			sourceTree = "<group>";
@@ -494,15 +503,18 @@
 				6038F9982D59DA3F002C0EC4 /* Quiz.swift in Sources */,
 				6038F9B42D59E077002C0EC4 /* MazeViewModel.swift in Sources */,
 				6038F9C32D59E640002C0EC4 /* String+Extensions.swift in Sources */,
+				C04B025D2D5D4D4100CA353A /* CharacterSelectionRepository.swift in Sources */,
 				C03DD6002D5A85C10041DA1A /* FetchUsersUseCase.swift in Sources */,
 				6038F9BC2D59E0A3002C0EC4 /* CustomLabel.swift in Sources */,
 				6038F9B02D59E04D002C0EC4 /* MainViewModel.swift in Sources */,
 				6038F9962D59D9CF002C0EC4 /* User.swift in Sources */,
 				6038F9CB2D59E66D002C0EC4 /* Subscriber+Helpers.swift in Sources */,
+				C04B02612D5D50CE00CA353A /* Character.swift in Sources */,
 				6038F99F2D59DF2A002C0EC4 /* QuizeRepository.swift in Sources */,
 				6038F9A72D59DF99002C0EC4 /* LocalStorage.swift in Sources */,
 				6038F95A2D5987D4002C0EC4 /* SceneDelegate.swift in Sources */,
 				6038F9C72D59E655002C0EC4 /* ErrorHandler.swift in Sources */,
+				C04B025F2D5D4D5400CA353A /* SelectCharacterUseCase.swift in Sources */,
 				6038F9A52D59DF7B002C0EC4 /* Endpoints.swift in Sources */,
 				6038F9B22D59E05A002C0EC4 /* MazeViewController.swift in Sources */,
 			);

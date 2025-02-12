@@ -38,15 +38,15 @@ final class DIContainer {
     }
 
     // MARK: - ViewModel Factory
-    func makeMainViewModel() -> MainViewModel {
-        return MainViewModel(fetchQuizUseCase: fetchQuizUseCase)
-    }
-
-    func makeQuizViewModel() -> QuizViewModel {
-        return QuizViewModel(fetchQuizUseCase: fetchQuizUseCase)
-    }
-
-    func makeMazeViewModel() -> MazeViewModel {
-        return MazeViewModel(userRepository: userRepository)
-    }
+//    func makeMainViewModel() -> MainViewModel {
+//        return MainViewModel(fetchQuizUseCase: fetchQuizUseCase)
+//    }
+//
+//    func makeQuizViewModel() -> QuizViewModel {
+//        return QuizViewModel(fetchQuizUseCase: fetchQuizUseCase)
+//    }
+//
+//    func makeMazeViewModel() -> MazeViewModel {
+//        return MazeViewModel(userRepository: userRepository)
+//    }
 }
