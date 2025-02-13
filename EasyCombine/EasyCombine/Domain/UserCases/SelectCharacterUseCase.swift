@@ -7,55 +7,45 @@
 
 import Combine
 
-/// 캐릭터 선택 기능을 수행하는 UseCase 프로토콜
-/// - 선택한 캐릭터 정보를 관리하고, 선택 시 말풍선 텍스트를 변경하는 역할을 수행
+/// 캐릭터 선택 관련 UseCase 프로토콜
 protocol SelectCharacterUseCase {
-    /// 현재 선택된 캐릭터 ID (없으면 nil)
-    var selectedCharacter: CurrentValueSubject<Int?, Never> { get }
-    
-    /// 말풍선에 표시될 텍스트
-    var balloonText: CurrentValueSubject<String, Never> { get }
-    
-    /// 캐릭터를 선택하는 메서드
-    /// - Parameter index: 선택한 캐릭터의 ID (0: 초딩, 1: 중딩, 2: 고딩)
-    func selectCharacter(_ index: Int)
+    var selectedCharacter: CurrentValueSubject<Int?, Never> { get }  // ✅ 현재 선택된 캐릭터 상태 관리
+    var balloonText: CurrentValueSubject<String, Never> { get }  // ✅ 말풍선 텍스트 상태 관리
+
+    func selectCharacter(_ index: Int)  // ✅ 캐릭터 선택 시 호출
+    func resetCharacterSelection()  // ✅ 화면이 닫힐 때 선택 상태 초기화
 }
 
-/// 캐릭터 선택 기능을 실제로 수행하는 기본 구현 클래스
-/// - 캐릭터 선택 시 UserDefaults에 저장하고, 말풍선 텍스트를 변경함
+/// 캐릭터 선택 UseCase의 기본 구현
 final class DefaultSelectCharacterUseCase: SelectCharacterUseCase {
-    /// 현재 선택된 캐릭터 ID를 관리하는 Subject (초기값: nil)
     let selectedCharacter = CurrentValueSubject<Int?, Never>(nil)
-    
-    /// 말풍선에 표시될 텍스트 (초기값: "기본문법 정복하러 가자!")
-    let balloonText = CurrentValueSubject<String, Never>("기본문법 정복하러 가자!")
-    
-    /// 선택한 캐릭터를 저장하는 저장소 (UserDefaults 사용)
+    let balloonText = CurrentValueSubject<String, Never>("기본문법 정복하러 가자!")  // ✅ 기본 값 유지
+
     private let repository: CharacterSelectionRepository
-    
-    /// UseCase 초기화 시 기존 저장된 선택 캐릭터 정보를 불러옴
-    /// - Parameter repository: 캐릭터 선택 정보를 저장하고 불러오는 저장소
+
+    /// UseCase 초기화 시 저장된 캐릭터 불러오기
+    /// - Parameter repository: 선택한 캐릭터 데이터를 저장하고 불러오는 저장소
     init(repository: CharacterSelectionRepository) {
         self.repository = repository
-        
-        // 앱 실행 시 저장된 캐릭터 불러오기 (UserDefaults에서 데이터 로드)
-        if let savedIndex = repository.getSelectedCharacter(),
-           let savedCharacter = Character.getCharacter(by: savedIndex) {
-            selectedCharacter.send(savedCharacter.id) // 저장된 캐릭터 선택
-            balloonText.send(savedCharacter.description) // 말풍선 텍스트 업데이트
-        }
+
+        // ✅ 저장된 캐릭터가 있을 때만 업데이트
+            if let savedIndex = repository.getSelectedCharacter() {
+                selectedCharacter.send(savedIndex)
+                balloonText.send(Character.getCharacter(by: savedIndex)?.description ?? "기본문법 정복하러 가자!")
+            }
     }
-    
-    /// 사용자가 캐릭터를 선택했을 때 실행되는 메서드
-    /// - 선택한 캐릭터 인덱스를 업데이트하고, 말풍선 텍스트를 변경하며, UserDefaults에 저장함
-    /// - Parameter index: 선택한 캐릭터의 ID (0: 초딩, 1: 중딩, 2: 고딩)
+
+    /// 캐릭터를 선택하고 저장
+    /// - Parameter index: 선택한 캐릭터의 인덱스
     func selectCharacter(_ index: Int) {
-        guard let character = Character.getCharacter(by: index) else { return }
-        
-        selectedCharacter.send(character.id) // 선택된 캐릭터 ID 업데이트
-        balloonText.send(character.description) // 말풍선 텍스트 변경
-        
-        // 선택한 캐릭터를 UserDefaults에 저장
-        repository.saveSelectedCharacter(index: character.id)
+        selectedCharacter.send(index)
+        balloonText.send(Character.getCharacter(by: index)?.description ?? "기본문법 정복하러 가자!")
+        repository.saveSelectedCharacter(index: index)  // ✅ 선택한 캐릭터 저장
+    }
+
+    /// ✅ 화면이 닫힐 때 캐릭터 선택 초기화
+    func resetCharacterSelection() {
+        selectedCharacter.send(nil)
+        balloonText.send("기본문법 정복하러 가자!")
     }
 }

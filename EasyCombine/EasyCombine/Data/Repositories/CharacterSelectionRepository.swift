@@ -17,7 +17,7 @@ protocol CharacterSelectionRepository {
     
     /// 저장된 선택한 캐릭터를 불러옴
     /// - Returns: 저장된 캐릭터 인덱스 (없으면 nil 반환)
-    func getSelectedCharacter() -> Int?
+    func getSelectedCharacter() -> Int?  // ✅ 반환 타입을 `Int?`로 변경
 }
 
 /// UserDefaults를 활용하여 선택한 캐릭터 정보를 관리하는 클래스
@@ -34,6 +34,6 @@ final class UserDefaultsCharacterRepository: CharacterSelectionRepository {
     /// 저장된 캐릭터 인덱스를 UserDefaults에서 불러옴
     /// - Returns: 저장된 캐릭터 인덱스 (없으면 nil 반환)
     func getSelectedCharacter() -> Int? {
-        return UserDefaults.standard.value(forKey: key) as? Int
+        return UserDefaults.standard.object(forKey: key) as? Int
     }
 }
