@@ -36,6 +36,9 @@ EasyCombine
 │   │   │-- Quiz                                    # 퀴즈 화면
 │   │   │   │-- QuizViewController.swift                    # 퀴즈 화면 뷰 컨트롤러
 │   │   │   │-- QuizViewModel.swift                         # 퀴즈 화면 상태 관리
+│   │-- Coordinators                   # 화면 전환을 담당하는 코디네이터 폴더 추가
+│       │-- MainCoordinator.swift                # 메인 화면 전환 담당 코디네이터
+│       │-- AppCoordinator.swift                 # 앱 전체의 네비게이션을 관리하는 코디네이터 (필요하면 추가)
 │   │-- Components                      # 재사용 가능한 UI 컴포넌트
 │       │-- CustomButton.swift                      # 공통 버튼 UI
 │       │-- CustomLabel.swift                       # 공통 라벨 UI

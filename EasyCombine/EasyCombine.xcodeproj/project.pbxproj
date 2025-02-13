@@ -42,6 +42,8 @@
 		C04B025D2D5D4D4100CA353A /* CharacterSelectionRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = C04B025C2D5D4D4100CA353A /* CharacterSelectionRepository.swift */; };
 		C04B025F2D5D4D5400CA353A /* SelectCharacterUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = C04B025E2D5D4D5400CA353A /* SelectCharacterUseCase.swift */; };
 		C04B02612D5D50CE00CA353A /* Character.swift in Sources */ = {isa = PBXBuildFile; fileRef = C04B02602D5D50CE00CA353A /* Character.swift */; };
+		C0BFB32B2D5E8DD300CFD838 /* MainCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0BFB32A2D5E8DD300CFD838 /* MainCoordinator.swift */; };
+		C0BFB32D2D5E8DDC00CFD838 /* AppCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0BFB32C2D5E8DDC00CFD838 /* AppCoordinator.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -101,6 +103,8 @@
 		C04B025C2D5D4D4100CA353A /* CharacterSelectionRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CharacterSelectionRepository.swift; sourceTree = "<group>"; };
 		C04B025E2D5D4D5400CA353A /* SelectCharacterUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectCharacterUseCase.swift; sourceTree = "<group>"; };
 		C04B02602D5D50CE00CA353A /* Character.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Character.swift; sourceTree = "<group>"; };
+		C0BFB32A2D5E8DD300CFD838 /* MainCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainCoordinator.swift; sourceTree = "<group>"; };
+		C0BFB32C2D5E8DDC00CFD838 /* AppCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppCoordinator.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -213,6 +217,7 @@
 		6038F98F2D598C7C002C0EC4 /* Presentation */ = {
 			isa = PBXGroup;
 			children = (
+				C0BFB3292D5E8DBF00CFD838 /* Coordinators */,
 				6038F9A82D59DFF3002C0EC4 /* Screens */,
 				6038F9A92D59E001002C0EC4 /* Components */,
 			);
@@ -357,6 +362,15 @@
 			path = Resources;
 			sourceTree = "<group>";
 		};
+		C0BFB3292D5E8DBF00CFD838 /* Coordinators */ = {
+			isa = PBXGroup;
+			children = (
+				C0BFB32A2D5E8DD300CFD838 /* MainCoordinator.swift */,
+				C0BFB32C2D5E8DDC00CFD838 /* AppCoordinator.swift */,
+			);
+			path = Coordinators;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -492,6 +506,7 @@
 				6038F9582D5987D4002C0EC4 /* AppDelegate.swift in Sources */,
 				6038F9BA2D59E098002C0EC4 /* CustomButton.swift in Sources */,
 				6038F9B62D59E082002C0EC4 /* QuizViewController.swift in Sources */,
+				C0BFB32D2D5E8DDC00CFD838 /* AppCoordinator.swift in Sources */,
 				6038F9C92D59E663002C0EC4 /* Publisher+Extenstions.swift in Sources */,
 				6038F9AE2D59E03F002C0EC4 /* MainViewController.swift in Sources */,
 				6038F9B82D59E08C002C0EC4 /* QuizViewModel.swift in Sources */,
@@ -501,6 +516,7 @@
 				6038F9C52D59E64B002C0EC4 /* Logger.swift in Sources */,
 				6038F99A2D59DA50002C0EC4 /* FetchQuizUseCase.swift in Sources */,
 				6038F9982D59DA3F002C0EC4 /* Quiz.swift in Sources */,
+				C0BFB32B2D5E8DD300CFD838 /* MainCoordinator.swift in Sources */,
 				6038F9B42D59E077002C0EC4 /* MazeViewModel.swift in Sources */,
 				6038F9C32D59E640002C0EC4 /* String+Extensions.swift in Sources */,
 				C04B025D2D5D4D4100CA353A /* CharacterSelectionRepository.swift in Sources */,

@@ -13,39 +13,63 @@
 // ViewModel은 FetchQuizUseCase를 통해 데이터를 UI 상태로 관리.
 
 import Combine
+import UIKit
 
-/// Main 화면의 ViewModel
-/// - 캐릭터 선택 상태를 관리하고, UseCase와 연결하여 UI 업데이트를 담당함.
 final class MainViewModel {
     private let useCase: SelectCharacterUseCase
-    private var cancellables = Set<AnyCancellable>() // Combine에서 사용되는 구독 관리 객체
+    private let coordinator: MainCoordinatorProtocol
+    private var cancellables = Set<AnyCancellable>()
     
-    /// 말풍선에 표시될 텍스트 (기본값: "기본문법 정복하러 가자!")
     @Published var balloonText: String = "기본문법 정복하러 가자!"
-    
-    /// 현재 선택된 캐릭터 (0: 초딩, 1: 중딩, 2: 고딩)
     @Published var selectedCharacter: Int? = nil
+    @Published var characterSizes: [CGSize] = []
     
-    /// - Parameter useCase: 캐릭터 선택 관련 비즈니스 로직을 담당하는 UseCase
-    init(useCase: SelectCharacterUseCase) {
+    private var originalCharacterSizes: [CGSize] = []
+    private var defaultBalloonText: String = "기본문법 정복하러 가자!"
+
+    init(useCase: SelectCharacterUseCase, coordinator: MainCoordinatorProtocol) {
         self.useCase = useCase
+        self.coordinator = coordinator
         bind()
     }
     
-    /// UseCase와 ViewModel의 데이터를 바인딩하여 UI가 자동으로 갱신되도록 설정
     private func bind() {
-        // 말풍선 텍스트를 UseCase에서 받아와 자동 업데이트
-        useCase.balloonText
-            .assign(to: &$balloonText)
-        
-        // 선택된 캐릭터 인덱스를 UseCase에서 받아와 자동 업데이트
-        useCase.selectedCharacter
-            .assign(to: &$selectedCharacter)
+        useCase.balloonText.assign(to: &$balloonText)
+        useCase.selectedCharacter.assign(to: &$selectedCharacter)
     }
-    
-    /// 캐릭터 선택 시 호출 (UI에서 버튼을 눌렀을 때 실행됨)
-    /// - Parameter index: 선택한 캐릭터의 인덱스 (0: 초딩, 1: 중딩, 2: 고딩)
-    func selectCharacter(_ index: Int) {
+
+    func setInitialSizes(_ sizes: [CGSize]) {
+        characterSizes = sizes
+        originalCharacterSizes = sizes
+    }
+
+    func highlightSelectedCharacter(_ index: Int) {
+        selectedCharacter = index
+        if let character = Character.getCharacter(by: index) {
+            balloonText = character.description
+        }
+
+        for i in 0..<characterSizes.count {
+            characterSizes[i] = i == index ?
+                CGSize(width: originalCharacterSizes[i].width * 1.1, height: originalCharacterSizes[i].height * 1.1) :
+                originalCharacterSizes[i]
+        }
+    }
+
+    func resetCharacterSize() {
+        selectedCharacter = nil
+        characterSizes = originalCharacterSizes
+        balloonText = defaultBalloonText
+    }
+
+    func confirmCharacterSelection(index: Int) {
         useCase.selectCharacter(index)
+        coordinator.navigateToMazeViewController()
+    }
+
+    /// ✅ MazeViewController가 닫힐 때 호출됨
+    func handleMazeViewDismiss() {
+        balloonText = "기본문법 정복하러 가자!"  // ✅ 초기 문구로 변경
+        print("✅ Maze 화면이 닫힘 - MainViewModel에서 이벤트 감지됨")
     }
 }
