@@ -20,7 +20,5 @@ final class MazeViewModel {
         self.userRepository = userRepository
     }
 
-//    func getUser() -> User {
-//        return userRepository.fetchUser()
-//    }
+    /// ✅ 추가 기능이 필요하면 여기에 메서드 추가 가능
 }

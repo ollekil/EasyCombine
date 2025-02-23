@@ -37,18 +37,13 @@ class MainViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        setupViewModel()
+        setupCharacterViews()
         setupBindings()
         setupInitialSizes()
     }
 
     /// ✅ ViewModel을 초기화하고, 코디네이터를 설정
-    private func setupViewModel() {
-        let repository = UserDefaultsCharacterRepository()
-        let useCase = DefaultSelectCharacterUseCase(repository: repository)
-        
-        // ✅ AppCoordinator를 주입받아 사용
-        viewModel = MainViewModel(useCase: useCase, coordinator: coordinator!)
+    private func setupCharacterViews() {
         characterViews = [character1, character2, character3]
     }
 

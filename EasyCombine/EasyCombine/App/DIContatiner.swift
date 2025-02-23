@@ -50,16 +50,18 @@ final class DIContainer {
         return viewController
     }
 
-    /// ✅ MazeViewController 생성 및 주입
-    func makeMazeViewController() -> MazeViewController {
-        let storyboard = UIStoryboard(name: "Main", bundle: nil)
-        let viewController = storyboard.instantiateViewController(withIdentifier: "MazeViewController") as! MazeViewController
-        
-//        let repository = DefaultMazeRepository()
-//        let useCase = FetchMazeUseCase(repository: repository)
-        
-//        viewController.coordinator = appCoordinator
-        
-        return viewController
-    }
+    /// MazeViewController 생성 및 주입
+     func makeMazeViewController() -> MazeViewController {
+         let storyboard = UIStoryboard(name: "Main", bundle: nil)
+         let viewController = storyboard.instantiateViewController(withIdentifier: "MazeViewController") as! MazeViewController
+
+         let userRepository = DefaultUserRepository()
+         let viewModel = MazeViewModel(userRepository: userRepository)
+
+         viewController.viewModel = viewModel
+         viewController.coordinator = appCoordinator
+         viewController.delegate = appCoordinator  // AppCoordinator를 delegate로 설정
+
+         return viewController
+     }
 }

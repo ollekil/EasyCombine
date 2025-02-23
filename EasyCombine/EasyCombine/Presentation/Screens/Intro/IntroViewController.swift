@@ -28,16 +28,6 @@ class IntroViewController: UIViewController {
     /// ✅ UI를 담당하는 뷰 (뷰 컨트롤러가 직접 UI를 다루지 않음)
     private let introView = IntroView()
 
-    /// ✅ 생성자 (스토리보드 기반 초기화)
-    required init?(coder: NSCoder) {
-        super.init(coder: coder)
-
-        // 🔹 의존성 주입 (UseCase → ViewModel)
-        let repository = DefaultIntroStoryRepository()
-        let useCase = FetchIntroStoryUseCase(repository: repository)
-        self.viewModel = IntroViewModel(fetchIntroStoryUseCase: useCase)
-    }
-
     /// ✅ `loadView()`에서 커스텀 뷰를 설정
     override func loadView() {
         view = introView
