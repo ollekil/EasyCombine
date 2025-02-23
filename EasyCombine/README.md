@@ -7,18 +7,22 @@ EasyCombine
 │
 │-- Domain                  # 비즈니스 로직 (순수한 비즈니스 계층, UI/외부 의존 없음)
 │   │-- Entities                        # 도메인 엔티티 정의    
-        ├── Character.swift  ← 캐릭터 데이터 모델 (Entity)
+|   |   ├── Character.swift  # 캐릭터 데이터 모델 (Entity)
+│   │   ├── IntroStory.swift  ✅ (인트로 텍스트 데이터 모델)
 │   │   │-- User.swift                              # 사용자 모델
 │   │   │-- Quiz.swift                              # 퀴즈 모델
 │   │-- UserCases                       # 유스케이스 - 도메인 로직 처리
-        ├── SelectCharacterUseCase.swift  ← 캐릭터 선택 비즈니스 로직
+|       ├── SelectCharacterUseCase.swift            # 캐릭터 선택 비즈니스 로직
+│   │   ├── FetchIntroStoryUseCase.swift  ✅ (인트로 텍스트 가져오기)
 │       │-- FetchQuizUseCase.swift                  # 퀴즈 데이터를 가져오는 유스케이스
+|       |-- SelectCharacterUseCase.swift            # 캐릭터 선택 데이터를 가져오는 유스케이스
 │
 │-- Data                   # 외부 데이터 관리 (API, DB, 로컬 저장소 등)
 │   │-- Repositories                    # 데이터 저장소 인터페이스 및 구현
-        ├── CharacterSelectionRepository.swift  ← 캐릭터 저장소 (UserDefaults 사용)
+|   |   ├── CharacterSelectionRepository.swift  ← 캐릭터 저장소 (UserDefaults 사용)
 │   │   │-- QuizeRepository.swift                   # 퀴즈 관련 데이터 관리
 │   │   │-- UserRepository.swift                    # 사용자 관련 데이터 관리
+│   │   ├── IntroStoryRepository.swift  ✅ (인트로 텍스트 관리)
 │   │-- Network                         # 네트워크 관련 계층
 │   │   │-- APIClient.swift                         # API 호출 로직
 │   │   │-- Endpoints.swift                         # API 엔드 포인트 정의
@@ -30,6 +34,9 @@ EasyCombine
 │   │   │-- Main                                    # 메인 화면
 │   │   │   │-- MainViewController.swift                    # 메인 화면 뷰 컨트롤러
 │   │   │   │-- MainViewModel.swift                         # UI 상태 관리 및 UseCase 연결
+|   |   |-- Intro
+|   |   |   |-- IntroViewController.swift                   # 메인 이후 인트로 화면 뷰 컨트롤러
+|   |   |   |-- IntroViewModel.swift                        # 인트로 화면 상태 관리
 │   │   │-- Maze                                    # 미로 화면
 │   │   │   │-- MazeViewController.swift                    # 미로 화면 뷰 컨트롤러
 │   │   │   │-- MazeViewModel.swift                         # 미로 화면 상태 관리
@@ -37,8 +44,8 @@ EasyCombine
 │   │   │   │-- QuizViewController.swift                    # 퀴즈 화면 뷰 컨트롤러
 │   │   │   │-- QuizViewModel.swift                         # 퀴즈 화면 상태 관리
 │   │-- Coordinators                   # 화면 전환을 담당하는 코디네이터 폴더 추가
-│       │-- MainCoordinator.swift                # 메인 화면 전환 담당 코디네이터
-│       │-- AppCoordinator.swift                 # 앱 전체의 네비게이션을 관리하는 코디네이터 (필요하면 추가)
+│   |   │-- MainCoordinator.swift                # 메인 화면 전환 담당 코디네이터
+│   |   │-- AppCoordinator.swift                 # 앱 전체의 네비게이션을 관리하는 코디네이터 (필요하면 추가)
 │   │-- Components                      # 재사용 가능한 UI 컴포넌트
 │       │-- CustomButton.swift                      # 공통 버튼 UI
 │       │-- CustomLabel.swift                       # 공통 라벨 UI
@@ -53,6 +60,7 @@ EasyCombine
 │   │-- CombineHelpers                  # Combine 관련 유틸리티
 │       │-- Publisher+Extenstions.swift             # 퍼블리셔 확장
 │       │-- Subscriber+Helpers.swift                # 서브스크라이버 유틸리티
+│   │   ├── Timer+Extensions.swift  ✅ (타이핑 효과를 위한 Combine 확장)
 │
 │-- Resources                           # 앱 리소스 및 다국어 지원
 │   │-- Assets.scassets                             # 이미지 및 아이콘 관리 

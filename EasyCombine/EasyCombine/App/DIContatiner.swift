@@ -49,4 +49,7 @@ final class DIContainer {
 //    func makeMazeViewModel() -> MazeViewModel {
 //        return MazeViewModel(userRepository: userRepository)
 //    }
+    func makeUserRepository() -> UserRepository {
+        return DefaultUserRepository()
+    }
 }

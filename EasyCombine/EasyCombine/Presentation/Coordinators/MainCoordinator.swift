@@ -23,8 +23,8 @@ final class MainCoordinator: MainCoordinatorProtocol {
     /// MazeViewController로 이동
     func navigateToMazeViewController() {
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
-        if let mazeVC = storyboard.instantiateViewController(withIdentifier: "MazeViewController") as? MazeViewController {
-            navigationController?.pushViewController(mazeVC, animated: true)
+        if let introVC = storyboard.instantiateViewController(withIdentifier: "IntroViewController") as? IntroViewController {
+            navigationController?.pushViewController(introVC, animated: true)
         }
     }
 }

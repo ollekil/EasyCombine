@@ -67,8 +67,8 @@
                                 <rect key="frame" x="44" y="394" width="90" height="90"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             </imageView>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="W4d-Vr-JwX">
-                                <rect key="frame" x="0.0" y="203" width="393" height="24"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="W4d-Vr-JwX">
+                                <rect key="frame" x="0.0" y="203" width="393" height="0.0"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="20"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
@@ -77,12 +77,30 @@
                                 <rect key="frame" x="251" y="394" width="90" height="90"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             </imageView>
+                            <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="lbl_test" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="suT-me-X3O" userLabel="Label(테스트)">
+                                <rect key="frame" x="0.0" y="113" width="383" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <button hidden="YES" opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="uKi-eo-OmT" userLabel="Button(테스트)">
+                                <rect key="frame" x="28" y="153" width="75" height="35"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="Button"/>
+                                <buttonConfiguration key="configuration" style="plain" title="Button"/>
+                                <connections>
+                                    <action selector="selectTest:" destination="BYZ-38-t0r" eventType="touchUpInside" id="Txn-O6-MpF"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
                             <constraint firstItem="W4d-Vr-JwX" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="DVK-2U-aDe"/>
+                            <constraint firstItem="suT-me-X3O" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="10" id="Ste-1e-EKm"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="suT-me-X3O" secondAttribute="trailing" constant="10" id="cn8-KH-Esu"/>
                             <constraint firstItem="W4d-Vr-JwX" firstAttribute="trailing" secondItem="6Tk-OE-BBY" secondAttribute="trailing" id="dgD-1C-owW"/>
+                            <constraint firstItem="suT-me-X3O" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="obv-Dm-9P7"/>
                             <constraint firstItem="W4d-Vr-JwX" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="100" id="u7a-jc-oaf"/>
                         </constraints>
                     </view>
@@ -95,6 +113,8 @@
                         <outlet property="character1" destination="g3P-tm-bpV" id="oGJ-7r-Cau"/>
                         <outlet property="character2" destination="aXG-Rg-dNh" id="dyN-zH-wCM"/>
                         <outlet property="character3" destination="BMG-pR-dJT" id="ToN-Eo-67A"/>
+                        <outlet property="tButton" destination="uKi-eo-OmT" id="XpZ-VW-wH2"/>
+                        <outlet property="tLbel" destination="suT-me-X3O" id="AMX-pX-xLm"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
@@ -115,6 +135,21 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="xTZ-GF-GRz" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="5865" y="660"/>
+        </scene>
+        <!--Intro View Controller-->
+        <scene sceneID="b3b-2v-Xj0">
+            <objects>
+                <viewController storyboardIdentifier="IntroViewController" id="wLM-6C-kR2" customClass="IntroViewController" customModule="EasyCombine" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="GBY-Vk-OfX">
+                        <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <viewLayoutGuide key="safeArea" id="SRk-v7-RMX"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="MVl-El-Y6n" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="5260" y="-664"/>
         </scene>
     </scenes>
     <resources>
