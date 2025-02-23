@@ -122,83 +122,73 @@ ViewModel에서는 UI 상태를 관리하고, 핵심 로직은 UseCase에 위임
 import Combine
 import UIKit
 
-/// 메인 화면의 ViewModel
-/// - 캐릭터 선택 상태를 관리하고, UseCase와 Coordinator를 통해 화면 전환을 수행
+/// ✅ 메인 화면의 ViewModel
 final class MainViewModel {
-    private let useCase: SelectCharacterUseCase  // 캐릭터 선택 비즈니스 로직을 담당하는 UseCase
-    private let coordinator: MainCoordinatorProtocol  // 화면 전환을 담당하는 Coordinator
-    private var cancellables = Set<AnyCancellable>()  //  Combine에서 사용되는 구독 관리 객체
+    private let useCase: SelectCharacterUseCase
+    private let coordinator: CoordinatorProtocol
+    private var cancellables = Set<AnyCancellable>()
     
-    @Published var balloonText: String = "나만의 캐릭터를 선택하고,Combine 퀘스트를 시작하자!"  // 말풍선 텍스트 상태 관리
-    @Published var selectedCharacter: Int? = nil  //  현재 선택된 캐릭터 인덱스
-    @Published var characterSizes: [CGSize] = []  //  캐릭터 크기 변경 상태 관리
+    @Published var balloonText: String = "나만의 캐릭터를 선택하고, Combine 퀘스트를 시작하자!"
+    @Published var selectedCharacter: Int? = nil
+    @Published var characterSizes: [CGSize] = []
 
-    /// 테스트
-    @Published var testText: String = "lbl_test"
-    
-    private var originalCharacterSizes: [CGSize] = []  //  캐릭터 원본 크기 저장 (애니메이션 원복용)
-    private var defaultBalloonText: String = "나만의 캐릭터를 선택하고,Combine 퀘스트를 시작하자!"  //  초기 문구 저장 (취소 시 원래대로 복귀)
+    private var originalCharacterSizes: [CGSize] = []
+    private var defaultBalloonText: String = "나만의 캐릭터를 선택하고, Combine 퀘스트를 시작하자!"
 
-    /// ViewModel 초기화
-    /// - Parameters:
-    ///   - useCase: 캐릭터 선택 로직을 처리하는 UseCase
-    ///   - coordinator: 화면 전환을 담당하는 Coordinator
-    init(useCase: SelectCharacterUseCase, coordinator: MainCoordinatorProtocol) {
+    /// ✅ ViewModel 초기화
+    init(useCase: SelectCharacterUseCase, coordinator: CoordinatorProtocol) {
         self.useCase = useCase
         self.coordinator = coordinator
         bind()
     }
     
-    /// Combine을 활용한 데이터 바인딩
+    /// ✅ Combine을 활용한 데이터 바인딩
     private func bind() {
-        useCase.balloonText.assign(to: &$balloonText)  //  UseCase의 말풍선 텍스트와 바인딩
-        useCase.selectedCharacter.assign(to: &$selectedCharacter)  //  선택된 캐릭터 상태 바인딩
-        useCase.testText.assign(to: &$testText)
+        useCase.balloonText.assign(to: &$balloonText)
+        useCase.selectedCharacter.assign(to: &$selectedCharacter)
     }
 
-    /// 초기 캐릭터 크기를 설정
-    /// - Parameter sizes: 각 캐릭터의 원본 크기 배열
+    /// ✅ 초기 캐릭터 크기를 설정
     func setInitialSizes(_ sizes: [CGSize]) {
         characterSizes = sizes
         originalCharacterSizes = sizes
     }
 
-    /// 선택된 캐릭터의 크기를 확대하고 말풍선 텍스트를 변경
-    /// - Parameter index: 선택한 캐릭터의 인덱스 (0, 1, 2)
+    /// ✅ 선택된 캐릭터를 강조하고 말풍선 텍스트 변경
     func highlightSelectedCharacter(_ index: Int) {
         selectedCharacter = index
         if let character = Character.getCharacter(by: index) {
-            balloonText = character.description  //  선택한 캐릭터에 맞는 문구 설정
+            balloonText = character.description
         }
 
+        // ✅ 선택된 캐릭터는 확대, 나머지는 원래 크기 유지
         for i in 0..<characterSizes.count {
-            characterSizes[i] = i == index ?
+            characterSizes[i] = (i == index) ?
                 CGSize(width: originalCharacterSizes[i].width * 1.6, height: originalCharacterSizes[i].height * 1.6) :
-                originalCharacterSizes[i]  //  선택된 캐릭터는 크기 확대, 나머지는 원래 크기 유지
+                originalCharacterSizes[i]
         }
     }
 
-    /// 선택 취소 시 크기를 원래대로 복귀
+    /// ✅ 선택 취소 시 크기 및 말풍선 복귀
     func resetCharacterSize() {
         selectedCharacter = nil
-        characterSizes = originalCharacterSizes
-        balloonText = defaultBalloonText  //  초기 문구로 변경
+        characterSizes = originalCharacterSizes  // ✅ 원래 크기로 복귀
+        balloonText = defaultBalloonText
     }
 
-    /// 캐릭터 선택 확정 후 `UseCase`를 통해 저장 및 화면 전환 처리
-    /// - Parameter index: 선택한 캐릭터의 인덱스 (0, 1, 2)
+    /// ✅ 캐릭터 선택 후 **IntroViewController**로 화면 전환
     func confirmCharacterSelection(index: Int) {
-        useCase.selectCharacter(index)  //  UseCase에 캐릭터 선택 처리 위임
-        coordinator.navigateToMazeViewController()  //  화면 이동은 Coordinator가 처리
+        useCase.selectCharacter(index)
+        coordinator.navigateToIntroViewController()  // ✅ Intro로 이동
     }
 
-    ///  MazeViewController가 닫힐 때 `UseCase`에서 상태 초기화
+    /// ✅ MazeViewController가 닫힐 때 상태 초기화
     func handleMazeViewDismiss() {
-        useCase.resetCharacterSelection()  //  UseCase에서 선택된 캐릭터 초기화
-        print(" Maze 화면이 닫힘 - ViewModel에서 이벤트 감지됨")
+        useCase.resetCharacterSelection()
+        print("Maze 화면이 닫힘 - ViewModel에서 이벤트 감지됨")
     }
-    
-    ///
+
+    /// ✅ 테스트 버튼 액션
     func handleTestButtonClicked() {
         useCase.testLblSelection()
     }

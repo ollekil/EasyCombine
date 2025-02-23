@@ -27,7 +27,7 @@
         <!--Main View Controller-->
         <scene sceneID="tne-QT-ifu">
             <objects>
-                <viewController id="BYZ-38-t0r" customClass="MainViewController" customModule="EasyCombine" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="MainViewController" id="BYZ-38-t0r" customClass="MainViewController" customModule="EasyCombine" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
                         <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -88,9 +88,6 @@
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" title="Button"/>
                                 <buttonConfiguration key="configuration" style="plain" title="Button"/>
-                                <connections>
-                                    <action selector="selectTest:" destination="BYZ-38-t0r" eventType="touchUpInside" id="Txn-O6-MpF"/>
-                                </connections>
                             </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
@@ -113,8 +110,6 @@
                         <outlet property="character1" destination="g3P-tm-bpV" id="oGJ-7r-Cau"/>
                         <outlet property="character2" destination="aXG-Rg-dNh" id="dyN-zH-wCM"/>
                         <outlet property="character3" destination="BMG-pR-dJT" id="ToN-Eo-67A"/>
-                        <outlet property="tButton" destination="uKi-eo-OmT" id="XpZ-VW-wH2"/>
-                        <outlet property="tLbel" destination="suT-me-X3O" id="AMX-pX-xLm"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
