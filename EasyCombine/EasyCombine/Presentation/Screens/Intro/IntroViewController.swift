@@ -18,34 +18,35 @@
 import UIKit
 import Combine
 
-/// ✅ 인트로 화면의 뷰 컨트롤러 (화면 흐름 관리)
+/// 인트로 화면을 관리하는 뷰 컨트롤러
 class IntroViewController: UIViewController {
     
     var viewModel: IntroViewModel!
     var cancellables = Set<AnyCancellable>()
-    var coordinator: AppCoordinator?  // ✅ AppCoordinator 추가 (화면 전환 담당)
+    var coordinator: AppCoordinator?  // 화면 전환을 담당하는 코디네이터
 
-    /// ✅ UI를 담당하는 뷰 (뷰 컨트롤러가 직접 UI를 다루지 않음)
+    /// 커스텀 뷰를 사용하여 UI 구성
     private let introView = IntroView()
 
-    /// ✅ `loadView()`에서 커스텀 뷰를 설정
+    /// 기본 뷰를 커스텀 뷰로 변경
     override func loadView() {
         view = introView
     }
 
-    /// ✅ 화면이 로드된 후 실행되는 메서드
+    /// 화면이 로드된 후 실행되는 메서드
     override func viewDidLoad() {
         super.viewDidLoad()
         
         bindViewModel()
         viewModel.startStoryAnimation()
         
-        // ✅ 버튼 클릭 시 `AppCoordinator`를 통해 화면 전환
+        // 버튼 클릭 시 게임 화면으로 이동
         introView.startButton.addTarget(self, action: #selector(startGame), for: .touchUpInside)
     }
 
-    /// ✅ ViewModel과 UI를 바인딩 (Combine 사용)
+    /// ViewModel과 UI를 연결 (Combine 사용)
     private func bindViewModel() {
+        // 현재 스토리 텍스트 업데이트
         viewModel.currentStoryText
             .receive(on: RunLoop.main)
             .sink { [weak self] text in
@@ -53,23 +54,26 @@ class IntroViewController: UIViewController {
             }
             .store(in: &cancellables)
 
+        // 캐릭터 등장 트리거
         viewModel.showCharacter
             .receive(on: RunLoop.main)
             .sink { [weak self] in self?.showCharacter() }
             .store(in: &cancellables)
 
+        // 배경 등장 트리거
         viewModel.showBackground
             .receive(on: RunLoop.main)
             .sink { [weak self] in self?.showBackground() }
             .store(in: &cancellables)
 
+        // 시작 버튼 등장 트리거
         viewModel.showStartButton
             .receive(on: RunLoop.main)
             .sink { [weak self] in self?.showStartButton() }
             .store(in: &cancellables)
     }
 
-    /// ✅ 캐릭터 등장 애니메이션
+    /// 캐릭터 등장 애니메이션
     private func showCharacter() {
         introView.characterImageView.alpha = 1
         UIView.animate(withDuration: 2.0, animations: {
@@ -79,7 +83,7 @@ class IntroViewController: UIViewController {
         }
     }
 
-    /// ✅ 배경 등장 애니메이션
+    /// 배경 등장 애니메이션
     private func showBackground() {
         UIView.animate(withDuration: 2.0, animations: {
             self.introView.backgroundImageView.alpha = 1
@@ -88,15 +92,15 @@ class IntroViewController: UIViewController {
         }
     }
 
-    /// ✅ 시작 버튼 등장 애니메이션
+    /// 시작 버튼 등장 애니메이션
     private func showStartButton() {
         UIView.animate(withDuration: 1.5) {
             self.introView.startButton.alpha = 1
         }
     }
 
-    /// ✅ 모험 시작 버튼 클릭 시 `MazeViewController`로 이동
+    /// 모험 시작 버튼 클릭 시 게임 화면으로 이동
     @objc private func startGame() {
-        coordinator?.navigateToMazeViewController()  // ✅ `AppCoordinator`를 통해 이동하도록 변경
+        coordinator?.navigateToMazeViewController()  // AppCoordinator를 통해 이동
     }
 }

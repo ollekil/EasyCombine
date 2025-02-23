@@ -16,20 +16,21 @@
 
 import UIKit
 
-/// ✅ MazeViewController가 종료될 때 알림을 보내는 델리게이트 프로토콜
+/// MazeViewController가 종료될 때 알림을 보내는 델리게이트 프로토콜
 protocol MazeViewControllerDelegate: AnyObject {
     func mazeViewDidDisappear()
 }
 
 class MazeViewController: UIViewController {
-    var viewModel: MazeViewModel!  // ✅ ViewModel 추가 (DIContainer에서 주입)
-    var coordinator: AppCoordinator?  // ✅ Coordinator 추가 (DIContainer에서 주입)
-    weak var delegate: MazeViewControllerDelegate?  // ✅ Delegate 추가 (DIContainer에서 주입)
+    var viewModel: MazeViewModel!  // DIContainer에서 주입되는 ViewModel
+    var coordinator: AppCoordinator?  // DIContainer에서 주입되는 Coordinator
+    weak var delegate: MazeViewControllerDelegate?  // DIContainer에서 주입되는 Delegate
 
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         
-        if self.isMovingFromParent {  // ✅ 사용자가 뒤로 가기 버튼을 눌렀을 때만 호출
+        // 사용자가 뒤로 가기 버튼을 눌렀을 때만 델리게이트 메서드 호출
+        if self.isMovingFromParent {
             delegate?.mazeViewDidDisappear()
         }
     }
@@ -39,7 +40,7 @@ class MazeViewController: UIViewController {
         
         self.view.backgroundColor = .yellow
         
-        // ✅ ViewModel이 존재하는지 확인하고 데이터 처리
+        // ViewModel이 정상적으로 주입되었는지 확인
         print("MazeViewModel이 주입됨: \(viewModel != nil)")
     }
 }

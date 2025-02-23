@@ -14,7 +14,7 @@
 import UIKit
 import Combine
 
-/// ✅ 메인 화면의 ViewController
+/// 메인 화면을 관리하는 ViewController
 class MainViewController: UIViewController {
     @IBOutlet weak var balloonLabel: UILabel!
     
@@ -30,7 +30,7 @@ class MainViewController: UIViewController {
     @IBOutlet weak var tLabel: UILabel!
 
     var viewModel: MainViewModel!
-    var coordinator: AppCoordinator?  // ✅ MainCoordinator → AppCoordinator 변경
+    var coordinator: AppCoordinator?  // 화면 전환을 담당하는 코디네이터
     private var cancellables = Set<AnyCancellable>()
     private var characterViews: [UIImageView] = []
 
@@ -42,13 +42,14 @@ class MainViewController: UIViewController {
         setupInitialSizes()
     }
 
-    /// ✅ ViewModel을 초기화하고, 코디네이터를 설정
+    /// 캐릭터 이미지뷰 배열을 설정
     private func setupCharacterViews() {
         characterViews = [character1, character2, character3]
     }
 
-    /// ✅ ViewModel의 데이터를 UI에 바인딩 (Combine 사용)
+    /// ViewModel과 UI를 바인딩 (Combine 사용)
     private func setupBindings() {
+        // 말풍선 텍스트 변경 시 UI 업데이트
         viewModel.$balloonText
             .receive(on: DispatchQueue.main)
             .sink { [weak self] text in
@@ -56,7 +57,7 @@ class MainViewController: UIViewController {
             }
             .store(in: &cancellables)
 
-        // ✅ 캐릭터 크기 변경 시 애니메이션 적용
+        // 캐릭터 크기 변경 시 애니메이션 적용
         viewModel.$characterSizes
             .receive(on: DispatchQueue.main)
             .sink { [weak self] sizes in
@@ -70,33 +71,33 @@ class MainViewController: UIViewController {
             .store(in: &cancellables)
     }
 
-    /// ✅ 캐릭터 크기 초기화
+    /// 캐릭터의 초기 크기 저장
     private func setupInitialSizes() {
         let initialSizes = characterViews.map { $0.frame.size }
         viewModel.setInitialSizes(initialSizes)
     }
 
-    /// ✅ 첫 번째 캐릭터 선택 버튼 액션
+    /// 첫 번째 캐릭터 선택 버튼 클릭
     @IBAction func selectCharacter1(_ sender: UIButton) {
         showConfirmationAlert(for: 0)
     }
 
-    /// ✅ 두 번째 캐릭터 선택 버튼 액션
+    /// 두 번째 캐릭터 선택 버튼 클릭
     @IBAction func selectCharacter2(_ sender: UIButton) {
         showConfirmationAlert(for: 1)
     }
 
-    /// ✅ 세 번째 캐릭터 선택 버튼 액션
+    /// 세 번째 캐릭터 선택 버튼 클릭
     @IBAction func selectCharacter3(_ sender: UIButton) {
         showConfirmationAlert(for: 2)
     }
 
-    /// ✅ 테스트 버튼 액션
+    /// 테스트 버튼 클릭
     @IBAction func selectTest(_ sender: UIButton) {
         viewModel.handleTestButtonClicked()
     }
 
-    /// ✅ 캐릭터 선택 확인 얼럿
+    /// 캐릭터 선택 시 확인 알림창 표시
     private func showConfirmationAlert(for index: Int) {
         viewModel.highlightSelectedCharacter(index)
 
@@ -107,6 +108,7 @@ class MainViewController: UIViewController {
 
         let confirmAction = UIAlertAction(title: "확인", style: .default) { [weak self] _ in
             self?.viewModel.confirmCharacterSelection(index: index)
+            self?.coordinator?.navigateToIntroViewController()
         }
 
         let cancelAction = UIAlertAction(title: "취소", style: .cancel) { [weak self] _ in

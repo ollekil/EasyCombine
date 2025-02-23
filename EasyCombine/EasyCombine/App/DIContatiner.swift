@@ -11,57 +11,69 @@
 
 import UIKit
 
-/// ✅ 의존성 주입 컨테이너
+/// 의존성 주입을 관리하는 컨테이너 클래스
+/// 앱의 주요 객체들을 생성하고 필요한 의존성을 주입하는 역할을 한다.
 final class DIContainer {
     let navigationController: UINavigationController
     let appCoordinator: AppCoordinator
 
-    /// ✅ DIContainer 초기화
+    /// DIContainer 초기화
+    /// - Parameter navigationController: 앱의 내비게이션 컨트롤러
     init(navigationController: UINavigationController) {
         self.navigationController = navigationController
         self.appCoordinator = AppCoordinator(navigationController: navigationController)
+        self.appCoordinator.diContainer = self // DIContainer를 AppCoordinator에 연결
     }
 
-    /// ✅ MainViewController 생성 및 주입
+    /// MainViewController 생성 및 의존성 주입
+    /// - Returns: MainViewController 인스턴스
     func makeMainViewController() -> MainViewController {
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
         let viewController = storyboard.instantiateViewController(withIdentifier: "MainViewController") as! MainViewController
         
+        // 캐릭터 선택 관련 유스케이스 및 저장소 생성
         let repository = UserDefaultsCharacterRepository()
         let useCase = DefaultSelectCharacterUseCase(repository: repository)
         
-        viewController.viewModel = MainViewModel(useCase: useCase, coordinator: appCoordinator) // ✅ viewModel 주입
-        viewController.coordinator = appCoordinator  // ✅ coordinator 주입 (추가)
+        // ViewModel만 주입 (Coordinator 제거)
+        viewController.viewModel = MainViewModel(useCase: useCase)
+        viewController.coordinator = appCoordinator // ViewController에서 직접 사용
 
         return viewController
     }
 
-    /// ✅ IntroViewController 생성 및 주입
+    /// IntroViewController 생성 및 의존성 주입
+    /// - Returns: IntroViewController 인스턴스
     func makeIntroViewController() -> IntroViewController {
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
         let viewController = storyboard.instantiateViewController(withIdentifier: "IntroViewController") as! IntroViewController
         
+        // 인트로 스토리 관련 유스케이스 및 저장소 생성
         let repository = DefaultIntroStoryRepository()
         let useCase = FetchIntroStoryUseCase(repository: repository)
         
+        // ViewModel과 Coordinator를 주입
         viewController.viewModel = IntroViewModel(fetchIntroStoryUseCase: useCase)
         viewController.coordinator = appCoordinator
-        
+
         return viewController
     }
 
-    /// MazeViewController 생성 및 주입
-     func makeMazeViewController() -> MazeViewController {
-         let storyboard = UIStoryboard(name: "Main", bundle: nil)
-         let viewController = storyboard.instantiateViewController(withIdentifier: "MazeViewController") as! MazeViewController
+    /// MazeViewController 생성 및 의존성 주입
+    /// - Returns: MazeViewController 인스턴스
+    func makeMazeViewController() -> MazeViewController {
+        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+        let viewController = storyboard.instantiateViewController(withIdentifier: "MazeViewController") as! MazeViewController
 
-         let userRepository = DefaultUserRepository()
-         let viewModel = MazeViewModel(userRepository: userRepository)
+        // 미로 화면 관련 유스케이스 및 저장소 생성
+        let userRepository = DefaultUserRepository()
+        let viewModel = MazeViewModel(userRepository: userRepository)
 
-         viewController.viewModel = viewModel
-         viewController.coordinator = appCoordinator
-         viewController.delegate = appCoordinator  // AppCoordinator를 delegate로 설정
+        // ViewModel과 Coordinator, Delegate를 주입
+        viewController.viewModel = viewModel
+        viewController.coordinator = appCoordinator
+        viewController.delegate = appCoordinator  // AppCoordinator를 delegate로 설정
 
-         return viewController
-     }
+        return viewController
+    }
 }
