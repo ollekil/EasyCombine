@@ -9,47 +9,57 @@
    - 의존성 주입 컨테이너
  */
 
-import Foundation
+import UIKit
 
+/// ✅ 의존성 주입 컨테이너
 final class DIContainer {
-    // MARK: - Properties
+    let navigationController: UINavigationController
+    let appCoordinator: AppCoordinator
 
-    // Network
-    private let apiClient: APIClient
-
-    // Repositories
-    private let quizRepository: QuizRepository
-    private let userRepository: UserRepository
-
-    // UseCases
-    private let fetchQuizUseCase: FetchQuizUseCase
-
-    // MARK: - Initializer
-    init() {
-        // APIClient 초기화
-        self.apiClient = DefaultAPIClient()
-
-        // Repository 초기화
-        self.quizRepository = DefaultQuizRepository(apiClient: apiClient)
-        self.userRepository = DefaultUserRepository()
-
-        // UseCase 초기화
-        self.fetchQuizUseCase = FetchQuizUseCase(quizRepository: quizRepository)
+    /// ✅ DIContainer 초기화
+    init(navigationController: UINavigationController) {
+        self.navigationController = navigationController
+        self.appCoordinator = AppCoordinator(navigationController: navigationController)
     }
 
-    // MARK: - ViewModel Factory
-//    func makeMainViewModel() -> MainViewModel {
-//        return MainViewModel(fetchQuizUseCase: fetchQuizUseCase)
-//    }
-//
-//    func makeQuizViewModel() -> QuizViewModel {
-//        return QuizViewModel(fetchQuizUseCase: fetchQuizUseCase)
-//    }
-//
-//    func makeMazeViewModel() -> MazeViewModel {
-//        return MazeViewModel(userRepository: userRepository)
-//    }
-    func makeUserRepository() -> UserRepository {
-        return DefaultUserRepository()
+    /// ✅ MainViewController 생성 및 주입
+    func makeMainViewController() -> MainViewController {
+        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+        let viewController = storyboard.instantiateViewController(withIdentifier: "MainViewController") as! MainViewController
+        
+        let repository = UserDefaultsCharacterRepository()
+        let useCase = DefaultSelectCharacterUseCase(repository: repository)
+        
+        viewController.viewModel = MainViewModel(useCase: useCase, coordinator: appCoordinator) // ✅ viewModel 주입
+        viewController.coordinator = appCoordinator  // ✅ coordinator 주입 (추가)
+
+        return viewController
+    }
+
+    /// ✅ IntroViewController 생성 및 주입
+    func makeIntroViewController() -> IntroViewController {
+        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+        let viewController = storyboard.instantiateViewController(withIdentifier: "IntroViewController") as! IntroViewController
+        
+        let repository = DefaultIntroStoryRepository()
+        let useCase = FetchIntroStoryUseCase(repository: repository)
+        
+        viewController.viewModel = IntroViewModel(fetchIntroStoryUseCase: useCase)
+        viewController.coordinator = appCoordinator
+        
+        return viewController
+    }
+
+    /// ✅ MazeViewController 생성 및 주입
+    func makeMazeViewController() -> MazeViewController {
+        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+        let viewController = storyboard.instantiateViewController(withIdentifier: "MazeViewController") as! MazeViewController
+        
+//        let repository = DefaultMazeRepository()
+//        let useCase = FetchMazeUseCase(repository: repository)
+        
+//        viewController.coordinator = appCoordinator
+        
+        return viewController
     }
 }

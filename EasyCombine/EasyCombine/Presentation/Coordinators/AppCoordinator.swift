@@ -16,6 +16,7 @@ protocol CoordinatorProtocol {
 /// ✅ AppCoordinator - 전체 화면 전환을 담당
 final class AppCoordinator: CoordinatorProtocol {
     var navigationController: UINavigationController
+    var diContainer: DIContainer? // ✅ 추가
 
     init(navigationController: UINavigationController) {
         self.navigationController = navigationController
@@ -23,28 +24,22 @@ final class AppCoordinator: CoordinatorProtocol {
 
     /// ✅ 앱 시작 시 초기 화면 설정
     func start() {
-        let storyboard = UIStoryboard(name: "Main", bundle: nil)
-        if let mainVC = storyboard.instantiateViewController(withIdentifier: "MainViewController") as? MainViewController {
-            mainVC.coordinator = self  // ✅ 코디네이터 주입
-            navigationController.viewControllers = [mainVC]
-        }
+        guard let diContainer = diContainer else { return }
+        let mainVC = diContainer.makeMainViewController()
+        navigationController.viewControllers = [mainVC]
     }
 
     /// ✅ MazeViewController로 이동
     func navigateToMazeViewController() {
-        let storyboard = UIStoryboard(name: "Main", bundle: nil)
-        if let mazeVC = storyboard.instantiateViewController(withIdentifier: "MazeViewController") as? MazeViewController {
-//            mazeVC.coordinator = self
-            navigationController.pushViewController(mazeVC, animated: true)
-        }
+        guard let diContainer = diContainer else { return }
+        let mazeVC = diContainer.makeMazeViewController()
+        navigationController.pushViewController(mazeVC, animated: true)
     }
 
     /// ✅ IntroViewController로 이동
     func navigateToIntroViewController() {
-        let storyboard = UIStoryboard(name: "Main", bundle: nil)
-        if let introVC = storyboard.instantiateViewController(withIdentifier: "IntroViewController") as? IntroViewController {
-            introVC.coordinator = self
-            navigationController.pushViewController(introVC, animated: true)
-        }
+        guard let diContainer = diContainer else { return }
+        let introVC = diContainer.makeIntroViewController()
+        navigationController.pushViewController(introVC, animated: true)
     }
 }

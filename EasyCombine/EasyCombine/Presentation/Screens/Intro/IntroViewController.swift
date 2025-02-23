@@ -21,8 +21,8 @@ import Combine
 /// ✅ 인트로 화면의 뷰 컨트롤러 (화면 흐름 관리)
 class IntroViewController: UIViewController {
     
-    private var viewModel: IntroViewModel!
-    private var cancellables = Set<AnyCancellable>()
+    var viewModel: IntroViewModel!
+    var cancellables = Set<AnyCancellable>()
     var coordinator: AppCoordinator?  // ✅ AppCoordinator 추가 (화면 전환 담당)
 
     /// ✅ UI를 담당하는 뷰 (뷰 컨트롤러가 직접 UI를 다루지 않음)

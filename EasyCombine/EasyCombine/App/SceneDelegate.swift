@@ -14,7 +14,8 @@ import UIKit
 class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
     var window: UIWindow?
-    var appCoordinator: AppCoordinator?
+    var diContainer: DIContainer?
+
 
 
     func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
@@ -23,32 +24,16 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         // This delegate does not imply the connecting scene or session are new (see `application:configurationForConnectingSceneSession` instead).
         guard let _ = (scene as? UIWindowScene) else { return }
         
-        // ✅ 스토리보드에서 자동으로 생성된 window를 사용
+        // ✅ 기존 window 활용
         if let window = window, let navigationController = window.rootViewController as? UINavigationController {
-            appCoordinator = AppCoordinator(navigationController: navigationController)
-            appCoordinator?.start()  // ✅ AppCoordinator 시작
+            diContainer = DIContainer(navigationController: navigationController)
+
+            // ✅ AppCoordinator에도 DIContainer 주입
+            diContainer?.appCoordinator.diContainer = diContainer
+
+            diContainer?.appCoordinator.start() // ✅ AppCoordinator 시작
         }
 
-        /*!<
-         ex
-        // Storyboard에서 MainViewController를 가져옴
-        let storyboard = UIStoryboard(name: "Main", bundle: nil)
-        guard let mainViewController = storyboard.instantiateViewController(withIdentifier: "MainViewController") as? MainViewController else {
-            fatalError("MainViewController not found in Storyboard")
-        }
-
-        // ViewModel 주입
-        let mainViewModel = diContainer.makeMainViewModel()
-        mainViewController.viewModel = mainViewModel
-
-        // 네비게이션 컨트롤러 설정
-        let navigationController = UINavigationController(rootViewController: mainViewController)
-
-        let window = UIWindow(windowScene: windowScene)
-        window.rootViewController = navigationController
-        self.window = window
-        window.makeKeyAndVisible()
-         */
     }
 
     func sceneDidDisconnect(_ scene: UIScene) {
