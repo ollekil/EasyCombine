@@ -35,6 +35,7 @@ class DialogueBubble: UIView {
         label.font = UIFont.systemFont(ofSize: 14, weight: .bold) // 폰트 설정
         label.numberOfLines = 0 // 여러 줄 지원
         label.lineBreakMode = .byWordWrapping // 단어 단위로 줄바꿈 설정
+        label.textColor = .black 
         addSubview(label) // 라벨을 말풍선에 추가
         
         // 오토레이아웃 설정

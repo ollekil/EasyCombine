@@ -72,6 +72,9 @@ class FieldViewModel {
         }
         
         // 현재 대사 출력 후 인덱스 증가
+        let currentDialogue = dialogues[dialogueIndex]
+        print("🗨️ 대사 출력: \(currentDialogue)") // 👉 로그 추가
+            
         dialogueText.send(dialogues[dialogueIndex])
         dialogueIndex += 1
     }
