@@ -18,20 +18,11 @@
 		6038F9792D5987D7002C0EC4 /* EasyCombineUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6038F9782D5987D7002C0EC4 /* EasyCombineUITests.swift */; };
 		6038F97B2D5987D7002C0EC4 /* EasyCombineUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6038F97A2D5987D7002C0EC4 /* EasyCombineUITestsLaunchTests.swift */; };
 		6038F9922D59D977002C0EC4 /* DIContatiner.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6038F9912D59D977002C0EC4 /* DIContatiner.swift */; };
-		6038F9962D59D9CF002C0EC4 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6038F9952D59D9CF002C0EC4 /* User.swift */; };
-		6038F9982D59DA3F002C0EC4 /* Quiz.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6038F9972D59DA3F002C0EC4 /* Quiz.swift */; };
-		6038F99A2D59DA50002C0EC4 /* FetchQuizUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6038F9992D59DA50002C0EC4 /* FetchQuizUseCase.swift */; };
-		6038F99F2D59DF2A002C0EC4 /* QuizeRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6038F99E2D59DF2A002C0EC4 /* QuizeRepository.swift */; };
-		6038F9A12D59DF49002C0EC4 /* UserRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6038F9A02D59DF49002C0EC4 /* UserRepository.swift */; };
 		6038F9A32D59DF63002C0EC4 /* APIClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6038F9A22D59DF63002C0EC4 /* APIClient.swift */; };
 		6038F9A52D59DF7B002C0EC4 /* Endpoints.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6038F9A42D59DF7B002C0EC4 /* Endpoints.swift */; };
 		6038F9A72D59DF99002C0EC4 /* LocalStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6038F9A62D59DF99002C0EC4 /* LocalStorage.swift */; };
 		6038F9AE2D59E03F002C0EC4 /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6038F9AD2D59E03F002C0EC4 /* MainViewController.swift */; };
 		6038F9B02D59E04D002C0EC4 /* MainViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6038F9AF2D59E04D002C0EC4 /* MainViewModel.swift */; };
-		6038F9B22D59E05A002C0EC4 /* MazeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6038F9B12D59E05A002C0EC4 /* MazeViewController.swift */; };
-		6038F9B42D59E077002C0EC4 /* MazeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6038F9B32D59E077002C0EC4 /* MazeViewModel.swift */; };
-		6038F9B62D59E082002C0EC4 /* QuizViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6038F9B52D59E082002C0EC4 /* QuizViewController.swift */; };
-		6038F9B82D59E08C002C0EC4 /* QuizViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6038F9B72D59E08C002C0EC4 /* QuizViewModel.swift */; };
 		6038F9BA2D59E098002C0EC4 /* CustomButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6038F9B92D59E098002C0EC4 /* CustomButton.swift */; };
 		6038F9BC2D59E0A3002C0EC4 /* CustomLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6038F9BB2D59E0A3002C0EC4 /* CustomLabel.swift */; };
 		6038F9C12D59E635002C0EC4 /* UIView+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6038F9C02D59E635002C0EC4 /* UIView+Extensions.swift */; };
@@ -40,17 +31,15 @@
 		6038F9C72D59E655002C0EC4 /* ErrorHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6038F9C62D59E655002C0EC4 /* ErrorHandler.swift */; };
 		6038F9C92D59E663002C0EC4 /* Publisher+Extenstions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6038F9C82D59E663002C0EC4 /* Publisher+Extenstions.swift */; };
 		6038F9CB2D59E66D002C0EC4 /* Subscriber+Helpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6038F9CA2D59E66D002C0EC4 /* Subscriber+Helpers.swift */; };
-		C03DD6002D5A85C10041DA1A /* FetchUsersUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = C03DD5FF2D5A85C00041DA1A /* FetchUsersUseCase.swift */; };
 		C049195E2D66618200EC7EEE /* IntroStory.swift in Sources */ = {isa = PBXBuildFile; fileRef = C049195D2D66618200EC7EEE /* IntroStory.swift */; };
 		C04919602D6661A200EC7EEE /* FetchIntroStoryUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = C049195F2D6661A200EC7EEE /* FetchIntroStoryUseCase.swift */; };
 		C04919642D6661DF00EC7EEE /* IntroStoryRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = C04919632D6661DF00EC7EEE /* IntroStoryRepository.swift */; };
 		C04919662D66626200EC7EEE /* Timer+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = C04919652D66626200EC7EEE /* Timer+Extensions.swift */; };
-		C04919682D66682F00EC7EEE /* IntroCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = C04919672D66682F00EC7EEE /* IntroCoordinator.swift */; };
 		C049196A2D666A1700EC7EEE /* IntroView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C04919692D666A1700EC7EEE /* IntroView.swift */; };
 		C04B025D2D5D4D4100CA353A /* CharacterSelectionRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = C04B025C2D5D4D4100CA353A /* CharacterSelectionRepository.swift */; };
 		C04B025F2D5D4D5400CA353A /* SelectCharacterUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = C04B025E2D5D4D5400CA353A /* SelectCharacterUseCase.swift */; };
 		C04B02612D5D50CE00CA353A /* Character.swift in Sources */ = {isa = PBXBuildFile; fileRef = C04B02602D5D50CE00CA353A /* Character.swift */; };
-		C0BFB32B2D5E8DD300CFD838 /* MainCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0BFB32A2D5E8DD300CFD838 /* MainCoordinator.swift */; };
+		C0900B722D74AB61005343F6 /* FieldViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0900B712D74AB61005343F6 /* FieldViewController.swift */; };
 		C0BFB32D2D5E8DDC00CFD838 /* AppCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0BFB32C2D5E8DDC00CFD838 /* AppCoordinator.swift */; };
 /* End PBXBuildFile section */
 
@@ -87,20 +76,11 @@
 		6038F9782D5987D7002C0EC4 /* EasyCombineUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EasyCombineUITests.swift; sourceTree = "<group>"; };
 		6038F97A2D5987D7002C0EC4 /* EasyCombineUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EasyCombineUITestsLaunchTests.swift; sourceTree = "<group>"; };
 		6038F9912D59D977002C0EC4 /* DIContatiner.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DIContatiner.swift; sourceTree = "<group>"; };
-		6038F9952D59D9CF002C0EC4 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
-		6038F9972D59DA3F002C0EC4 /* Quiz.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Quiz.swift; sourceTree = "<group>"; };
-		6038F9992D59DA50002C0EC4 /* FetchQuizUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FetchQuizUseCase.swift; sourceTree = "<group>"; };
-		6038F99E2D59DF2A002C0EC4 /* QuizeRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuizeRepository.swift; sourceTree = "<group>"; };
-		6038F9A02D59DF49002C0EC4 /* UserRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserRepository.swift; sourceTree = "<group>"; };
 		6038F9A22D59DF63002C0EC4 /* APIClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIClient.swift; sourceTree = "<group>"; };
 		6038F9A42D59DF7B002C0EC4 /* Endpoints.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Endpoints.swift; sourceTree = "<group>"; };
 		6038F9A62D59DF99002C0EC4 /* LocalStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalStorage.swift; sourceTree = "<group>"; };
 		6038F9AD2D59E03F002C0EC4 /* MainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
 		6038F9AF2D59E04D002C0EC4 /* MainViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewModel.swift; sourceTree = "<group>"; };
-		6038F9B12D59E05A002C0EC4 /* MazeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MazeViewController.swift; sourceTree = "<group>"; };
-		6038F9B32D59E077002C0EC4 /* MazeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MazeViewModel.swift; sourceTree = "<group>"; };
-		6038F9B52D59E082002C0EC4 /* QuizViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuizViewController.swift; sourceTree = "<group>"; };
-		6038F9B72D59E08C002C0EC4 /* QuizViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuizViewModel.swift; sourceTree = "<group>"; };
 		6038F9B92D59E098002C0EC4 /* CustomButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomButton.swift; sourceTree = "<group>"; };
 		6038F9BB2D59E0A3002C0EC4 /* CustomLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomLabel.swift; sourceTree = "<group>"; };
 		6038F9C02D59E635002C0EC4 /* UIView+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+Extensions.swift"; sourceTree = "<group>"; };
@@ -109,17 +89,15 @@
 		6038F9C62D59E655002C0EC4 /* ErrorHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ErrorHandler.swift; sourceTree = "<group>"; };
 		6038F9C82D59E663002C0EC4 /* Publisher+Extenstions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Publisher+Extenstions.swift"; sourceTree = "<group>"; };
 		6038F9CA2D59E66D002C0EC4 /* Subscriber+Helpers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Subscriber+Helpers.swift"; sourceTree = "<group>"; };
-		C03DD5FF2D5A85C00041DA1A /* FetchUsersUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FetchUsersUseCase.swift; sourceTree = "<group>"; };
 		C049195D2D66618200EC7EEE /* IntroStory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IntroStory.swift; sourceTree = "<group>"; };
 		C049195F2D6661A200EC7EEE /* FetchIntroStoryUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FetchIntroStoryUseCase.swift; sourceTree = "<group>"; };
 		C04919632D6661DF00EC7EEE /* IntroStoryRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IntroStoryRepository.swift; sourceTree = "<group>"; };
 		C04919652D66626200EC7EEE /* Timer+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Timer+Extensions.swift"; sourceTree = "<group>"; };
-		C04919672D66682F00EC7EEE /* IntroCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IntroCoordinator.swift; sourceTree = "<group>"; };
 		C04919692D666A1700EC7EEE /* IntroView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IntroView.swift; sourceTree = "<group>"; };
 		C04B025C2D5D4D4100CA353A /* CharacterSelectionRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CharacterSelectionRepository.swift; sourceTree = "<group>"; };
 		C04B025E2D5D4D5400CA353A /* SelectCharacterUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectCharacterUseCase.swift; sourceTree = "<group>"; };
 		C04B02602D5D50CE00CA353A /* Character.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Character.swift; sourceTree = "<group>"; };
-		C0BFB32A2D5E8DD300CFD838 /* MainCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainCoordinator.swift; sourceTree = "<group>"; };
+		C0900B712D74AB61005343F6 /* FieldViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FieldViewController.swift; sourceTree = "<group>"; };
 		C0BFB32C2D5E8DDC00CFD838 /* AppCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppCoordinator.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -263,8 +241,6 @@
 		6038F9932D59D9A9002C0EC4 /* Entities */ = {
 			isa = PBXGroup;
 			children = (
-				6038F9952D59D9CF002C0EC4 /* User.swift */,
-				6038F9972D59DA3F002C0EC4 /* Quiz.swift */,
 				C04B02602D5D50CE00CA353A /* Character.swift */,
 				C049195D2D66618200EC7EEE /* IntroStory.swift */,
 			);
@@ -274,8 +250,6 @@
 		6038F9942D59D9B5002C0EC4 /* UserCases */ = {
 			isa = PBXGroup;
 			children = (
-				6038F9992D59DA50002C0EC4 /* FetchQuizUseCase.swift */,
-				C03DD5FF2D5A85C00041DA1A /* FetchUsersUseCase.swift */,
 				C04B025E2D5D4D5400CA353A /* SelectCharacterUseCase.swift */,
 				C049195F2D6661A200EC7EEE /* FetchIntroStoryUseCase.swift */,
 			);
@@ -285,8 +259,6 @@
 		6038F99B2D59DEF9002C0EC4 /* Repositories */ = {
 			isa = PBXGroup;
 			children = (
-				6038F99E2D59DF2A002C0EC4 /* QuizeRepository.swift */,
-				6038F9A02D59DF49002C0EC4 /* UserRepository.swift */,
 				C04B025C2D5D4D4100CA353A /* CharacterSelectionRepository.swift */,
 				C04919632D6661DF00EC7EEE /* IntroStoryRepository.swift */,
 			);
@@ -313,10 +285,9 @@
 		6038F9A82D59DFF3002C0EC4 /* Screens */ = {
 			isa = PBXGroup;
 			children = (
+				C0900B702D74AB36005343F6 /* Field */,
 				6025AD642D65CF040032003E /* Intro */,
 				6038F9AA2D59E00C002C0EC4 /* Main */,
-				6038F9AB2D59E016002C0EC4 /* Maze */,
-				6038F9AC2D59E022002C0EC4 /* Quiz */,
 			);
 			path = Screens;
 			sourceTree = "<group>";
@@ -337,24 +308,6 @@
 				6038F9AF2D59E04D002C0EC4 /* MainViewModel.swift */,
 			);
 			path = Main;
-			sourceTree = "<group>";
-		};
-		6038F9AB2D59E016002C0EC4 /* Maze */ = {
-			isa = PBXGroup;
-			children = (
-				6038F9B12D59E05A002C0EC4 /* MazeViewController.swift */,
-				6038F9B32D59E077002C0EC4 /* MazeViewModel.swift */,
-			);
-			path = Maze;
-			sourceTree = "<group>";
-		};
-		6038F9AC2D59E022002C0EC4 /* Quiz */ = {
-			isa = PBXGroup;
-			children = (
-				6038F9B52D59E082002C0EC4 /* QuizViewController.swift */,
-				6038F9B72D59E08C002C0EC4 /* QuizViewModel.swift */,
-			);
-			path = Quiz;
 			sourceTree = "<group>";
 		};
 		6038F9BD2D59E600002C0EC4 /* Extenstions */ = {
@@ -393,11 +346,17 @@
 			path = Resources;
 			sourceTree = "<group>";
 		};
+		C0900B702D74AB36005343F6 /* Field */ = {
+			isa = PBXGroup;
+			children = (
+				C0900B712D74AB61005343F6 /* FieldViewController.swift */,
+			);
+			path = Field;
+			sourceTree = "<group>";
+		};
 		C0BFB3292D5E8DBF00CFD838 /* Coordinators */ = {
 			isa = PBXGroup;
 			children = (
-				C0BFB32A2D5E8DD300CFD838 /* MainCoordinator.swift */,
-				C04919672D66682F00EC7EEE /* IntroCoordinator.swift */,
 				C0BFB32C2D5E8DDC00CFD838 /* AppCoordinator.swift */,
 			);
 			path = Coordinators;
@@ -537,40 +496,29 @@
 				6038F9C12D59E635002C0EC4 /* UIView+Extensions.swift in Sources */,
 				6038F9582D5987D4002C0EC4 /* AppDelegate.swift in Sources */,
 				6038F9BA2D59E098002C0EC4 /* CustomButton.swift in Sources */,
-				6038F9B62D59E082002C0EC4 /* QuizViewController.swift in Sources */,
 				C0BFB32D2D5E8DDC00CFD838 /* AppCoordinator.swift in Sources */,
 				6038F9C92D59E663002C0EC4 /* Publisher+Extenstions.swift in Sources */,
 				6038F9AE2D59E03F002C0EC4 /* MainViewController.swift in Sources */,
-				6038F9B82D59E08C002C0EC4 /* QuizViewModel.swift in Sources */,
 				6038F9922D59D977002C0EC4 /* DIContatiner.swift in Sources */,
-				6038F9A12D59DF49002C0EC4 /* UserRepository.swift in Sources */,
+				C0900B722D74AB61005343F6 /* FieldViewController.swift in Sources */,
 				6038F9A32D59DF63002C0EC4 /* APIClient.swift in Sources */,
 				6038F9C52D59E64B002C0EC4 /* Logger.swift in Sources */,
-				6038F99A2D59DA50002C0EC4 /* FetchQuizUseCase.swift in Sources */,
-				6038F9982D59DA3F002C0EC4 /* Quiz.swift in Sources */,
-				C0BFB32B2D5E8DD300CFD838 /* MainCoordinator.swift in Sources */,
-				6038F9B42D59E077002C0EC4 /* MazeViewModel.swift in Sources */,
 				6038F9C32D59E640002C0EC4 /* String+Extensions.swift in Sources */,
 				C049196A2D666A1700EC7EEE /* IntroView.swift in Sources */,
 				C04B025D2D5D4D4100CA353A /* CharacterSelectionRepository.swift in Sources */,
-				C03DD6002D5A85C10041DA1A /* FetchUsersUseCase.swift in Sources */,
 				6038F9BC2D59E0A3002C0EC4 /* CustomLabel.swift in Sources */,
 				C049195E2D66618200EC7EEE /* IntroStory.swift in Sources */,
 				6038F9B02D59E04D002C0EC4 /* MainViewModel.swift in Sources */,
 				C04919602D6661A200EC7EEE /* FetchIntroStoryUseCase.swift in Sources */,
-				6038F9962D59D9CF002C0EC4 /* User.swift in Sources */,
 				C04919662D66626200EC7EEE /* Timer+Extensions.swift in Sources */,
 				6038F9CB2D59E66D002C0EC4 /* Subscriber+Helpers.swift in Sources */,
 				C04B02612D5D50CE00CA353A /* Character.swift in Sources */,
-				6038F99F2D59DF2A002C0EC4 /* QuizeRepository.swift in Sources */,
 				6025AD682D65CF3C0032003E /* IntroViewModel.swift in Sources */,
 				6038F9A72D59DF99002C0EC4 /* LocalStorage.swift in Sources */,
 				6038F95A2D5987D4002C0EC4 /* SceneDelegate.swift in Sources */,
 				6038F9C72D59E655002C0EC4 /* ErrorHandler.swift in Sources */,
 				C04B025F2D5D4D5400CA353A /* SelectCharacterUseCase.swift in Sources */,
-				C04919682D66682F00EC7EEE /* IntroCoordinator.swift in Sources */,
 				6038F9A52D59DF7B002C0EC4 /* Endpoints.swift in Sources */,
-				6038F9B22D59E05A002C0EC4 /* MazeViewController.swift in Sources */,
 				C04919642D6661DF00EC7EEE /* IntroStoryRepository.swift in Sources */,
 				6025AD662D65CF2C0032003E /* IntroViewController.swift in Sources */,
 			);

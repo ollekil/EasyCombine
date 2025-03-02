@@ -9,19 +9,13 @@ EasyCombine
 │   │-- Entities                        # 도메인 엔티티 정의    
 |   |   ├── Character.swift  # 캐릭터 데이터 모델 (Entity)
 │   │   ├── IntroStory.swift  ✅ (인트로 텍스트 데이터 모델)
-│   │   │-- User.swift                              # 사용자 모델
-│   │   │-- Quiz.swift                              # 퀴즈 모델
 │   │-- UserCases                       # 유스케이스 - 도메인 로직 처리
 |       ├── SelectCharacterUseCase.swift            # 캐릭터 선택 비즈니스 로직
 │   │   ├── FetchIntroStoryUseCase.swift  ✅ (인트로 텍스트 가져오기)
-│       │-- FetchQuizUseCase.swift                  # 퀴즈 데이터를 가져오는 유스케이스
-|       |-- SelectCharacterUseCase.swift            # 캐릭터 선택 데이터를 가져오는 유스케이스
 │
 │-- Data                   # 외부 데이터 관리 (API, DB, 로컬 저장소 등)
 │   │-- Repositories                    # 데이터 저장소 인터페이스 및 구현
 |   |   ├── CharacterSelectionRepository.swift  ← 캐릭터 저장소 (UserDefaults 사용)
-│   │   │-- QuizeRepository.swift                   # 퀴즈 관련 데이터 관리
-│   │   │-- UserRepository.swift                    # 사용자 관련 데이터 관리
 │   │   ├── IntroStoryRepository.swift  ✅ (인트로 텍스트 관리)
 │   │-- Network                         # 네트워크 관련 계층
 │   │   │-- APIClient.swift                         # API 호출 로직
@@ -37,12 +31,6 @@ EasyCombine
 |   |   |-- Intro
 |   |   |   |-- IntroViewController.swift                   # 메인 이후 인트로 화면 뷰 컨트롤러
 |   |   |   |-- IntroViewModel.swift                        # 인트로 화면 상태 관리
-│   │   │-- Maze                                    # 미로 화면
-│   │   │   │-- MazeViewController.swift                    # 미로 화면 뷰 컨트롤러
-│   │   │   │-- MazeViewModel.swift                         # 미로 화면 상태 관리
-│   │   │-- Quiz                                    # 퀴즈 화면
-│   │   │   │-- QuizViewController.swift                    # 퀴즈 화면 뷰 컨트롤러
-│   │   │   │-- QuizViewModel.swift                         # 퀴즈 화면 상태 관리
 │   │-- Coordinators                   # 화면 전환을 담당하는 코디네이터 폴더 추가
 │   |   │-- MainCoordinator.swift                # 메인 화면 전환 담당 코디네이터
 │   |   │-- AppCoordinator.swift                 # 앱 전체의 네비게이션을 관리하는 코디네이터 (필요하면 추가)
@@ -71,8 +59,6 @@ EasyCombine
 │-- Tests               # 테스트 코드 (Unit/UI 테스트)
 │   │-- UnitTests                       # 유닛 테스트
 │       │-- MainViewModelTests.swift                # MainViewModel 테스트
-│       │-- QuizViewModelTests.swift                # QuizViewModel 테스트
 │   │-- UITests                         # UI 테스트    
 │       │-- MainScreentUITests.swift                # Main UI 테스트
-│       │-- QuizScreenUITests.swift                 # Quiz UI 테스트
 

@@ -10,7 +10,6 @@ import UIKit
 /// 화면 전환을 담당하는 코디네이터 프로토콜
 /// 특정 화면으로 이동하는 기능을 정의
 protocol CoordinatorProtocol {
-    func navigateToMazeViewController()
     func navigateToIntroViewController()
 }
 
@@ -32,31 +31,17 @@ final class AppCoordinator: CoordinatorProtocol {
         navigationController.viewControllers = [mainVC]
     }
 
-    /// 미로(Maze) 화면으로 이동
-    func navigateToMazeViewController() {
-        guard let diContainer = diContainer else { return }
-        let mazeVC = diContainer.makeMazeViewController()
-        mazeVC.delegate = self  // 미로 화면이 닫혔을 때 이벤트를 받기 위해 delegate 설정
-        navigationController.pushViewController(mazeVC, animated: true)
-    }
-
     /// 인트로 화면으로 이동
     func navigateToIntroViewController() {
         guard let diContainer = diContainer else { return }
         let introVC = diContainer.makeIntroViewController()
         navigationController.pushViewController(introVC, animated: true)
     }
-}
-
-/// MazeViewController의 종료 이벤트를 처리하는 델리게이트 구현
-extension AppCoordinator: MazeViewControllerDelegate {
-    /// 미로 화면이 닫혔을 때 실행되는 메서드
-    func mazeViewDidDisappear() {
-        print("MazeViewController가 닫혔습니다. (AppCoordinator에서 감지됨)")
-
-        // 메인 화면으로 돌아올 때, 캐릭터 크기를 초기화
-        if let mainVC = navigationController.viewControllers.first(where: { $0 is MainViewController }) as? MainViewController {
-            mainVC.viewModel.resetCharacterSize()
-        }
+    
+    /// 인트로 화면으로 이동
+    func navigateToFieldViewController() {
+        guard let diContainer = diContainer else { return }
+        let introVC = diContainer.makeFieldViewController()
+        navigationController.pushViewController(introVC, animated: true)
     }
 }

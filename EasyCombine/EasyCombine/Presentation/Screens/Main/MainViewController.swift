@@ -108,7 +108,9 @@ class MainViewController: UIViewController {
 
         let confirmAction = UIAlertAction(title: "확인", style: .default) { [weak self] _ in
             self?.viewModel.confirmCharacterSelection(index: index)
-            self?.coordinator?.navigateToIntroViewController()
+//            self?.coordinator?.navigateToIntroViewController()
+            // !! test bjk
+            self?.coordinator?.navigateToFieldViewController()
         }
 
         let cancelAction = UIAlertAction(title: "취소", style: .cancel) { [weak self] _ in

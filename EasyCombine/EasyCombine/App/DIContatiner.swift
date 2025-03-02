@@ -58,21 +58,20 @@ final class DIContainer {
 
         return viewController
     }
-
-    /// MazeViewController 생성 및 의존성 주입
-    /// - Returns: MazeViewController 인스턴스
-    func makeMazeViewController() -> MazeViewController {
+    
+    /// IntroViewController 생성 및 의존성 주입
+    /// - Returns: IntroViewController 인스턴스
+    func makeFieldViewController() -> FieldViewController {
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
-        let viewController = storyboard.instantiateViewController(withIdentifier: "MazeViewController") as! MazeViewController
-
-        // 미로 화면 관련 유스케이스 및 저장소 생성
-        let userRepository = DefaultUserRepository()
-        let viewModel = MazeViewModel(userRepository: userRepository)
-
-        // ViewModel과 Coordinator, Delegate를 주입
-        viewController.viewModel = viewModel
-        viewController.coordinator = appCoordinator
-        viewController.delegate = appCoordinator  // AppCoordinator를 delegate로 설정
+        let viewController = storyboard.instantiateViewController(withIdentifier: "FieldViewController") as! FieldViewController
+        
+//        // 인트로 스토리 관련 유스케이스 및 저장소 생성
+//        let repository = DefaultIntroStoryRepository()
+//        let useCase = FetchIntroStoryUseCase(repository: repository)
+//        
+//        // ViewModel과 Coordinator를 주입
+//        viewController.viewModel = IntroViewModel(fetchIntroStoryUseCase: useCase)
+//        viewController.coordinator = appCoordinator
 
         return viewController
     }

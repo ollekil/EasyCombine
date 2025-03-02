@@ -101,6 +101,6 @@ class IntroViewController: UIViewController {
 
     /// 모험 시작 버튼 클릭 시 게임 화면으로 이동
     @objc private func startGame() {
-        coordinator?.navigateToMazeViewController()  // AppCoordinator를 통해 이동
+        coordinator?.navigateToFieldViewController()  // AppCoordinator를 통해 이동
     }
 }
