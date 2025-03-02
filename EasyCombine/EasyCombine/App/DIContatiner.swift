@@ -59,20 +59,20 @@ final class DIContainer {
         return viewController
     }
     
-    /// IntroViewController 생성 및 의존성 주입
-    /// - Returns: IntroViewController 인스턴스
+    /// FieldViewController 생성 및 의존성 주입
+    /// - Returns: FieldViewController 인스턴스
     func makeFieldViewController() -> FieldViewController {
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
         let viewController = storyboard.instantiateViewController(withIdentifier: "FieldViewController") as! FieldViewController
         
-//        // 인트로 스토리 관련 유스케이스 및 저장소 생성
-//        let repository = DefaultIntroStoryRepository()
-//        let useCase = FetchIntroStoryUseCase(repository: repository)
-//        
-//        // ViewModel과 Coordinator를 주입
-//        viewController.viewModel = IntroViewModel(fetchIntroStoryUseCase: useCase)
-//        viewController.coordinator = appCoordinator
-
+        // 의존성 주입 (UseCase 및 ViewModel 추가)
+        let repository = DialogueRepository()
+        let useCase = FieldUseCase(repository: repository)
+        let viewModel = FieldViewModel(useCase: useCase)
+        
+        viewController.viewModel = viewModel
+        viewController.coordinator = appCoordinator
+        
         return viewController
     }
 }

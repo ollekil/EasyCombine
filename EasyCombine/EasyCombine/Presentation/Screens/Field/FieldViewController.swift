@@ -8,205 +8,128 @@
 import UIKit
 import Combine
 
+// MARK: - FieldViewController (Presentation Layer)
+/// 필드 화면을 담당하는 뷰 컨트롤러
+/// - 마법사와 몬스터의 등장, 대사 진행, VS 연출 및 전투 화면으로 전환하는 역할을 한다.
 class FieldViewController: UIViewController {
-    private var cancellables = Set<AnyCancellable>()
+    private var cancellables = Set<AnyCancellable>() // Combine을 활용한 비동기 이벤트 구독 관리
+    var viewModel: FieldViewModel! // ViewModel을 주입받아 데이터 및 상태를 관리
+    var coordinator: AppCoordinator? // 화면 전환을 관리하는 코디네이터
     
     // UI 요소
-    private let backgroundImageView = UIImageView(image: UIImage(named: "fieldBg"))
-    private let wizardImageView = UIImageView(image: UIImage(named: "b"))
-    private let monsterImageView = UIImageView(image: UIImage(named: "c"))
-    private let wizardDialogueBubble = DialogueBubble()
-    private let monsterDialogueBubble = DialogueBubble()
+    private let backgroundImageView = UIImageView(image: UIImage(named: "fieldBg")) // 배경 이미지
+    private let wizardImageView = UIImageView(image: UIImage(named: "b")) // 마법사 캐릭터 이미지
+    private let monsterImageView = UIImageView(image: UIImage(named: "c")) // 몬스터 캐릭터 이미지
+    private let dialogueBubble = DialogueBubble() // 대사 말풍선
     private let vsLabel: UILabel = {
         let label = UILabel()
-        label.text = "VS"
+        label.text = "VS" // VS 표시 (전투 시작 연출)
         label.font = UIFont.boldSystemFont(ofSize: 40)
         label.textColor = .red
         label.textAlignment = .center
-        label.alpha = 0
+        label.alpha = 0 // 초기에는 숨김 상태
         return label
     }()
-    
-    // 상태 관리
-    @Published private var wizardAppeared = false
-    @Published private var monsterAppeared = false
-    
-    private let nextAction = PassthroughSubject<Void, Never>()
     
     override func viewDidLoad() {
         super.viewDidLoad()
         setupUI()
         setupBindings()
-        startSequence()
+        viewModel.startSequence()
     }
     
+    /// UI 초기 설정
     private func setupUI() {
         view.addSubview(backgroundImageView)
         view.addSubview(wizardImageView)
         view.addSubview(monsterImageView)
-        view.addSubview(wizardDialogueBubble)
-        view.addSubview(monsterDialogueBubble)
+        view.addSubview(dialogueBubble)
         view.addSubview(vsLabel)
         
         backgroundImageView.frame = view.bounds
-        
-        wizardImageView.frame = CGRect(x: -100, y: view.bounds.height * 0.6, width: 100, height: 100)
-        monsterImageView.frame = CGRect(x: view.bounds.width + 100, y: view.bounds.height * 0.6, width: 100, height: 100)
-        
-        wizardDialogueBubble.frame = CGRect(x: 20, y: wizardImageView.frame.minY - 80, width: 200, height: 80)
-        monsterDialogueBubble.frame = CGRect(x: view.bounds.width - 220, y: monsterImageView.frame.minY - 90, width: 200, height: 80)
-        
+        wizardImageView.frame = CGRect(x: -150, y: view.bounds.height * 0.6, width: 100, height: 100) // 마법사 초기 위치 (왼쪽 바깥)
+        monsterImageView.frame = CGRect(x: view.bounds.width + 150, y: view.bounds.height * 0.6, width: 100, height: 100) // 몬스터 초기 위치 (오른쪽 바깥)
+        dialogueBubble.frame = CGRect(x: 50, y: wizardImageView.frame.minY - 80, width: view.bounds.width - 100, height: 80)
         vsLabel.frame = CGRect(x: (view.bounds.width / 2) - 40, y: wizardImageView.frame.minY - 60, width: 80, height: 50)
         
-        wizardDialogueBubble.isHidden = true
-        monsterDialogueBubble.isHidden = true
+        dialogueBubble.isHidden = true // 대사 말풍선은 초기에는 숨김 상태
     }
     
+    /// ViewModel과 바인딩 설정
     private func setupBindings() {
-        $wizardAppeared
-            .filter { $0 }
-            .sink { [weak self] _ in self?.showWizardDialogue() }
+        viewModel.wizardAppeared
+            .sink { [weak self] _ in self?.showWizard() } // 마법사 등장 이벤트를 구독
             .store(in: &cancellables)
         
-        $monsterAppeared
-            .filter { $0 }
-            .sink { [weak self] _ in self?.showMonsterDialogue() }
+        viewModel.monsterAppeared
+            .sink { [weak self] _ in self?.showMonster() } // 몬스터 등장 이벤트를 구독
             .store(in: &cancellables)
         
-        nextAction
-            .sink { [weak self] in self?.moveToCenter() }
+        viewModel.dialogueText
+            .sink { [weak self] text in
+                self?.showDialogue(text) // 대사 표시 이벤트를 구독
+            }
+            .store(in: &cancellables)
+        
+        viewModel.moveToCenter
+            .sink { [weak self] in self?.moveToCenter() } // 마법사와 몬스터가 중앙으로 이동하는 이벤트를 구독
             .store(in: &cancellables)
     }
     
-    private func startSequence() {
-        showWizard()
-    }
-    
+    /// 마법사 등장 애니메이션
     private func showWizard() {
         UIView.animate(withDuration: 1.0, animations: {
             self.wizardImageView.frame.origin.x = 50
         }) { _ in
-            self.wizardAppeared = true
+            self.viewModel.startWizardDialogue() // 마법사 등장 후 대사 시작
         }
     }
     
-    private func showWizardDialogue() {
-        let dialogues = [
-            "이곳에 데이터의 흐름이 어지럽혀지고 있어...",
-            "데이터가 흘러야 하는데... 네가 이를 막고 있군!",
-            "Combine 마법으로 네 정체를 밝혀주마!"
-        ]
-        showDialogueSequentially(dialogues, isWizard: true) {
-            self.showMonster()
-        }
-    }
-    
+    /// 몬스터 등장 애니메이션
     private func showMonster() {
         UIView.animate(withDuration: 1.0, animations: {
             self.monsterImageView.frame.origin.x = self.view.bounds.width - 150
         }) { _ in
-            self.monsterAppeared = true
+            self.viewModel.startMonsterDialogue() // 몬스터 등장 후 대사 시작
         }
     }
     
-    private func showMonsterDialogue() {
-        let dialogues = [
-            "하하하! 나는 '끊어진 스트림'! 데이터를 막는 자다!",
-            "Publisher가 데이터를 보내도, 난 절대 Subscriber에게 넘기지 않지!"
-        ]
-        showDialogueSequentially(dialogues, isWizard: false) {
-            self.nextAction.send()
-        }
-    }
-    
-    private func showDialogueSequentially(_ dialogues: [String], isWizard: Bool, completion: @escaping () -> Void) {
-        guard !dialogues.isEmpty else {
-            completion()
-            return
-        }
-        
-        var dialoguesQueue = dialogues
-        let firstDialogue = dialoguesQueue.removeFirst()
-        let dialogueBubble = isWizard ? wizardDialogueBubble : monsterDialogueBubble
-        
-        dialogueBubble.setText(firstDialogue)
+    /// 대사 표시 애니메이션
+    private func showDialogue(_ text: String) {
+        dialogueBubble.setText(text)
         dialogueBubble.isHidden = false
-        
         UIView.animate(withDuration: 0.5, animations: {
-            dialogueBubble.alpha = 1
+            self.dialogueBubble.alpha = 1
         }) { _ in
             DispatchQueue.main.asyncAfter(deadline: .now() + 2.5) {
                 UIView.animate(withDuration: 0.5, animations: {
-                    dialogueBubble.alpha = 0
+                    self.dialogueBubble.alpha = 0
                 }) { _ in
-                    dialogueBubble.isHidden = true
-                    self.showDialogueSequentially(dialoguesQueue, isWizard: isWizard, completion: completion)
+                    self.dialogueBubble.isHidden = true
+                    self.viewModel.nextDialogue() // 다음 대사 호출
                 }
             }
         }
     }
     
+    /// 마법사와 몬스터가 중앙으로 이동하는 애니메이션
     private func moveToCenter() {
         UIView.animate(withDuration: 1.5, animations: {
-            self.wizardImageView.frame.origin.x = (self.view.bounds.width / 2) - 80
-            self.monsterImageView.frame.origin.x = (self.view.bounds.width / 2) + 20
+            self.wizardImageView.frame.origin.x = (self.view.bounds.width / 2) - 100
+            self.monsterImageView.frame.origin.x = (self.view.bounds.width / 2)
         }) { _ in
-            self.showVSLabel()
+            self.showVSLabel() // 이동 후 VS 연출
         }
     }
     
+    /// VS 연출 표시 후 전투 화면으로 전환
     private func showVSLabel() {
         UIView.animate(withDuration: 0.5, animations: {
             self.vsLabel.alpha = 1
         }) { _ in
             DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) {
-                self.transitionToBattle()
+                self.viewModel.transitionToBattle() // 전투 화면으로 전환
             }
         }
-    }
-    
-    private func transitionToBattle() {
-//        let battleVC = BasicBattleViewController()
-//        self.present(battleVC, animated: true, completion: nil)
-    }
-}
-
-class DialogueBubble: UIView {
-    private let label = UILabel()
-    
-    init() {
-        super.init(frame: .zero)
-        setupUI()
-    }
-    
-    required init?(coder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
-    }
-    
-    private func setupUI() {
-        backgroundColor = .white
-        layer.cornerRadius = 10
-        layer.borderWidth = 1
-        layer.borderColor = UIColor.black.cgColor
-        
-        label.textAlignment = .center
-        label.font = UIFont.systemFont(ofSize: 14, weight: .bold)
-        label.numberOfLines = 0
-        label.lineBreakMode = .byWordWrapping
-        addSubview(label)
-        
-        label.translatesAutoresizingMaskIntoConstraints = false
-        NSLayoutConstraint.activate([
-            label.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 8),
-            label.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -8),
-            label.topAnchor.constraint(equalTo: topAnchor, constant: 5),
-            label.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -5)
-        ])
-    }
-    
-    func setText(_ text: String) {
-        label.text = text
-        label.sizeToFit()
-        self.frame.size.height = label.frame.height + 20
     }
 }
